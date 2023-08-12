@@ -1,0 +1,1 @@
+/Users/iliasamodin/Documents/programming/git_projects/tasks_for_yandex_job-python3.11.1/input.txt
