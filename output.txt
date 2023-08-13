@@ -1,1 +1,10 @@
-{"offers": [{"offer_id": "offer2", "market_sku": 682644, "price": 499}, {"offer_id": "offer1", "market_sku": 10846332, "price": 1490}, {"offer_id": "offer3", "market_sku": 832784, "price": 14000}]}
+-19
+-17
+-2
+2
+4
+6
+8
+17
+256
+1024
