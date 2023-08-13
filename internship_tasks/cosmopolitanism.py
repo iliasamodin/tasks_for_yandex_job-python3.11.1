@@ -1,6 +1,3 @@
-from collections import OrderedDict
-
-
 # A class whose objects are countries suitable for classmate immigration
 class Country:
     def __init__(
@@ -48,7 +45,7 @@ class Classmate:
 # The function of finding the best country 
 #   for immigration of each classmate
 def search_where_classmates_migrated(
-        dictionary_of_all_countries, 
+        list_of_all_countries, 
         countries_without_education,
         list_of_classmates
     ):
@@ -58,9 +55,9 @@ def search_where_classmates_migrated(
         #   based on the presence or absence of higher education 
         #   from a classmate
         available_sample_of_countries = \
-            list(dictionary_of_all_countries.values()) \
-            if classmate.education else \
-            list(countries_without_education.values())
+            list_of_all_countries \
+            if classmate.education \
+            else countries_without_education
 
         start_index = 0
         end_index = len(available_sample_of_countries) - 1
@@ -115,8 +112,8 @@ if __name__ == "__main__":
         citizenship_of_parents = \
         [line.strip().split(" ") for line in input_file]
 
-    dictionary_of_all_countries = OrderedDict()
-    countries_without_education = OrderedDict()
+    list_of_all_countries = []
+    countries_without_education = []
     for country_position, country_data in enumerate(
         zip(min_incomes, education_requirements, migrations_for_children), 
         start=1
@@ -131,15 +128,15 @@ if __name__ == "__main__":
             bool(int(migration_for_children))
         )
 
-        dictionary_of_all_countries.update({country_position: country})
+        list_of_all_countries.append(country)
         if not int(education_requirement):
-            countries_without_education.update({country_position: country})
+            countries_without_education.append(country)
 
     list_of_classmates = [
         Classmate(
             int(classmate_income), 
             bool(int(availability_of_education)), 
-            dictionary_of_all_countries.get(int(parental_citizenship))
+            list_of_all_countries[int(parental_citizenship)-1] if parental_citizenship != "0" else None
         )
         for classmate_income, availability_of_education, parental_citizenship
         in zip(
@@ -150,7 +147,7 @@ if __name__ == "__main__":
     ]
 
     where_classmates_migrated = search_where_classmates_migrated(
-        dictionary_of_all_countries, 
+        list_of_all_countries, 
         countries_without_education,
         list_of_classmates
     )
